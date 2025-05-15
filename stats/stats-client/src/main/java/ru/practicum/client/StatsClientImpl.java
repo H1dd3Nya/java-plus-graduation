@@ -3,6 +3,8 @@ package ru.practicum.client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -17,6 +19,7 @@ import java.util.List;
 @Component
 @Slf4j
 public class StatsClientImpl implements StatsClient {
+    private DiscoveryClient discoveryClient;
     private final RestClient restClient;
 
 
@@ -52,6 +55,19 @@ public class StatsClientImpl implements StatsClient {
         } catch (Exception exp) {
             log.info(exp.getMessage());
             return null;
+        }
+    }
+
+    private ServiceInstance getInstance() {
+        try {
+            return discoveryClient
+                    .getInstances("stats-server")
+                    .getFirst();
+        } catch (Exception exception) {
+            throw new RuntimeException(
+                    "Ошибка обнаружения адреса сервиса статистики с id: " + "stats-server",
+                    exception
+            );
         }
     }
 
