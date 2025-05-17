@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS event CASCADE;
 DROP TABLE IF EXISTS request CASCADE;
 DROP TABLE IF EXISTS compilation_event CASCADE;
 DROP TABLE IF EXISTS compilation CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE IF NOT EXISTS location
 (
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS event (
     event_date TIMESTAMP WITHOUT TIME ZONE,
     published_on TIMESTAMP WITHOUT TIME ZONE,
     state VARCHAR(255),
-    views BIGINT ARRAY,
+    views BIGINT[],
     CONSTRAINT pk_event PRIMARY KEY (id),
     CONSTRAINT fk_event_on_category FOREIGN KEY (category_id) REFERENCES category (id),
     CONSTRAINT fk_event_on_user FOREIGN KEY (user_id) REFERENCES users (id)

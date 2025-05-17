@@ -1,4 +1,4 @@
-package ru.yandex.practicum.discoveryServer;
+package ru.practicum.infra;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

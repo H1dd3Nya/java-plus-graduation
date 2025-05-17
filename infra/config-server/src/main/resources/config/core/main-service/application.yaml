@@ -21,3 +21,8 @@ spring:
     url: jdbc:postgresql://localhost:7654/ewm-main
     username: user
     password: password
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/

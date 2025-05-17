@@ -29,3 +29,8 @@ logging:
     org.springframework.transaction: INFO
     org.springframework.transaction.interceptor: TRACE
     org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
