@@ -20,10 +20,12 @@ import java.util.List;
 @Slf4j
 @Transactional
 public class StatsServiceImpl implements StatService {
-    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
     private final StatRepository repository;
     private final StatsMapper mapper;
+
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+
 
     @Override
     public StatsResponseDto save(HitRequestDto body) {
@@ -38,13 +40,11 @@ public class StatsServiceImpl implements StatService {
     }
 
     @Override
-    public List<StatsResponseDto> getStats(String pathStart,
-                                           String pathEnd,
+    public List<StatsResponseDto> getStats(LocalDateTime start,
+                                           LocalDateTime end,
                                            List<String> uris,
-                                           Boolean unique) {
+                                           boolean unique) {
         List<StatsResponseDto> hits;
-        LocalDateTime start = getDateTime(pathStart);
-        LocalDateTime end = getDateTime(pathEnd);
         if (start.isAfter(end)) {
             throw new InvalidRequestException("Start is after end");
         }
