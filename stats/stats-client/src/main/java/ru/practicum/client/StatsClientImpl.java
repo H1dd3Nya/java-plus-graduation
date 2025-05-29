@@ -2,7 +2,8 @@ package ru.practicum.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -17,18 +18,19 @@ import java.util.List;
 @Component
 @Slf4j
 public class StatsClientImpl implements StatsClient {
-    private final RestClient restClient;
-
+    private final DiscoveryClient discoveryClient;
+    private RestClient restClient;
 
     @Autowired
-    public StatsClientImpl(@Value("${stats-server.url}") String statsUrl) {
-        this.restClient = RestClient.create(statsUrl);
+    public StatsClientImpl(DiscoveryClient discoveryClient) {
+        this.discoveryClient = discoveryClient;
     }
 
     @Override
     public List<StatsResponseDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         try {
+            this.restClient = RestClient.create(this.getInstance().getUri().toString());
             var response = restClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/stats")
                             .queryParam("start", start.format(formatter))
@@ -48,6 +50,7 @@ public class StatsClientImpl implements StatsClient {
     @Override
     public StatsResponseDto hit(HitRequestDto statDto) {
         try {
+            this.restClient = RestClient.create(this.getInstance().getUri().toString());
             return restClient.post().uri("/hit").body(statDto).retrieve().body(StatsResponseDto.class);
         } catch (Exception exp) {
             log.info(exp.getMessage());
@@ -55,5 +58,16 @@ public class StatsClientImpl implements StatsClient {
         }
     }
 
-
+    private ServiceInstance getInstance() {
+        try {
+            return discoveryClient
+                    .getInstances("stats-server")
+                    .getFirst();
+        } catch (Exception exception) {
+            throw new RuntimeException(
+                    "Ошибка обнаружения адреса сервиса статистики с id: " + "stats-server",
+                    exception
+            );
+        }
+    }
 }
