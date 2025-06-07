@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.application.api.dto.user.UserDto;
 import ru.practicum.application.api.exception.ConflictException;
 import ru.practicum.application.user.api.UserInterface;
