@@ -1,7 +1,7 @@
 package ru.practicum.application.comment.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.application.api.dto.comment.CommentDto;
 import ru.practicum.application.api.exception.NotFoundException;
 import ru.practicum.application.comment.api.CommentInterface;
