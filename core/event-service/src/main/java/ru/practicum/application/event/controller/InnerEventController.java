@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.application.api.dto.event.EventFullDto;
 import ru.practicum.application.api.dto.event.EventShortDto;
 import ru.practicum.application.api.exception.NotFoundException;
-import ru.practicum.application.event.api.InnerEventInterface;
 import ru.practicum.application.event.service.InnerEventService;
+import ru.practicum.application.event.api.InnerEventInterface;
 
 import java.util.List;
 

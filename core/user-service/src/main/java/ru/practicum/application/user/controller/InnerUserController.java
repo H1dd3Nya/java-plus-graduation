@@ -6,8 +6,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.application.api.dto.user.UserDto;
 import ru.practicum.application.api.exception.NotFoundException;
-import ru.practicum.application.user.api.InnerUserInterface;
 import ru.practicum.application.user.service.UserService;
+import ru.practicum.application.user.api.InnerUserInterface;
 
 @RestController
 @RequiredArgsConstructor

@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.application.api.dto.request.EventRequestDto;
-import ru.practicum.application.request.api.InnerEventRequestInterface;
 import ru.practicum.application.request.service.EventRequestService;
+import ru.practicum.application.request.api.InnerEventRequestInterface;
 
 import java.util.List;
 
@@ -30,5 +30,10 @@ public class InnerRequestController implements InnerEventRequestInterface {
     @Override
     public List<EventRequestDto> findByEventIds(List<Long> id) {
         return service.findByEventIds(id);
+    }
+
+    @Override
+    public boolean isUserTakePart(Long userId, Long eventId) {
+        return service.isUserTakePart(userId, eventId);
     }
 }

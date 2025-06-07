@@ -3,7 +3,7 @@ package ru.practicum.application.comment.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.application.api.dto.comment.CommentDto;
 import ru.practicum.application.api.exception.ConflictException;
 import ru.practicum.application.api.exception.NotFoundException;

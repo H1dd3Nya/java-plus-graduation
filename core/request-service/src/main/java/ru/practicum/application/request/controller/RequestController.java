@@ -3,7 +3,7 @@ package ru.practicum.application.request.controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.application.api.dto.request.EventRequestDto;
 import ru.practicum.application.api.exception.ConflictException;
 import ru.practicum.application.api.exception.NotFoundException;

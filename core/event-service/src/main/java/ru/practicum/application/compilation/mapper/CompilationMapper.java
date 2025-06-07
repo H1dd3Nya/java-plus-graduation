@@ -5,6 +5,8 @@ import ru.practicum.application.api.dto.compilation.NewCompilationDto;
 import ru.practicum.application.api.dto.compilation.ResponseCompilationDto;
 import ru.practicum.application.compilation.model.Compilation;
 
+import java.util.stream.Collectors;
+
 @UtilityClass
 public class CompilationMapper {
     public static Compilation mapToCompilation(NewCompilationDto dto) {

@@ -2,10 +2,10 @@ package ru.practicum.application.request.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.application.api.dto.request.EventRequestDto;
 import ru.practicum.application.api.exception.ConflictException;
 import ru.practicum.application.api.exception.NotFoundException;
 import ru.practicum.application.api.exception.ValidationException;
+import ru.practicum.application.api.dto.request.EventRequestDto;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package ru.practicum.application.category.service;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -10,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.application.api.dto.category.CategoryDto;
 import ru.practicum.application.api.exception.ConflictException;
 import ru.practicum.application.api.exception.NotFoundException;
+import ru.practicum.application.category.repository.CategoryRepository;
 import ru.practicum.application.category.mapper.CategoryMapper;
 import ru.practicum.application.category.model.Category;
-import ru.practicum.application.category.repository.CategoryRepository;
 import ru.practicum.application.event.client.EventClient;
 
 import java.util.List;
@@ -88,10 +89,11 @@ public class CategoryServiceImpl implements CategoryService {
             throw new NotFoundException(String.format("Категория с id=%d не существует", catId));
         }
 
-        if (eventClient.existsByCategoryId(catId)) {
+        if (!eventClient.existsByCategoryId(catId)) {
+            categoryRepository.deleteById(catId);
+        } else {
             throw new ConflictException("Невозможно удаление используемой категории события ");
         }
-        categoryRepository.deleteById(catId);
     }
 
     @Override
