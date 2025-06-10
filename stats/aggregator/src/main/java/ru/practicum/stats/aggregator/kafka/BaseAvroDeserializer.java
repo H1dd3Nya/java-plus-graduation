@@ -23,7 +23,6 @@ public class BaseAvroDeserializer<T extends SpecificRecordBase> implements Deser
         reader = new SpecificDatumReader<>(schema);
         decoder = decoderFactory;
     }
-
     @Override
     public T deserialize(String topic, byte[] data) {
         try {

@@ -48,10 +48,6 @@ public class EventServiceImpl implements EventService {
     final CollectorClient collectorClient;
     final AnalyzerClient analyzerClient;
 
-    private static InteractionsCountRequestProto getInteractionsRequest(Long eventId) {
-        return InteractionsCountRequestProto.newBuilder().addEventId(eventId).build();
-    }
-
     @Override
     public EventFullDto getEventById(Long eventId, Long userId, String uri, String ip) throws NotFoundException {
         collectorClient.sendUserAction(createUserAction(eventId, userId, ActionTypeProto.ACTION_VIEW, Instant.now()));
@@ -210,6 +206,10 @@ public class EventServiceImpl implements EventService {
 
                 })
                 .collect(Collectors.toList());
+    }
+
+    private static InteractionsCountRequestProto getInteractionsRequest(Long eventId) {
+        return InteractionsCountRequestProto.newBuilder().addEventId(eventId).build();
     }
 
     UserActionProto createUserAction(Long eventId, Long userId, ActionTypeProto type, Instant timestamp) {

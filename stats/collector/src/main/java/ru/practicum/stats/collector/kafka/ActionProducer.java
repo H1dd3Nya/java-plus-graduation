@@ -12,8 +12,8 @@ import ru.practicum.ewm.stats.avro.UserActionAvro;
 @AllArgsConstructor
 @Slf4j
 public class ActionProducer {
-    final String topic;
     Producer<String, UserActionAvro> producer;
+    final String topic;
 
     public void send(UserActionAvro action) {
         log.info("Отправления действия пользователя {} для события {}", action.getUserId(), action.getEventId());

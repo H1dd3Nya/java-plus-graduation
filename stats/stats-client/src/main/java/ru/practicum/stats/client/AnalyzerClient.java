@@ -2,9 +2,12 @@ package ru.practicum.stats.client;
 
 import com.google.common.collect.Lists;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.practicum.ewm.stats.proto.*;
 
 import java.util.List;

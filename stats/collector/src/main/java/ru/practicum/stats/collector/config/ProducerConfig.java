@@ -27,6 +27,6 @@ public class ProducerConfig {
 
         Producer<String, UserActionAvro> producer = new KafkaProducer<>(properties);
 
-        return new ActionProducer(topic, producer);
+        return new ActionProducer(producer, topic);
     }
 }
